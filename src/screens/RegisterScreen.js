@@ -7,6 +7,8 @@ import Loader from '../componenets/Loader';
 import { register } from '../actions/userActions';
 import FormContainer from '../componenets/FormContainer';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Google from './css/google.svg'
+import { BASE_URL } from '../constants/constants';
 
 const RegisterScreen = () => {
   const history = useHistory();
@@ -68,6 +70,10 @@ const RegisterScreen = () => {
     }
   };
 
+  const loginwithgoogle = ()=> {
+    window.open(`${BASE_URL}/auth/google/callback`,"_self")
+  }
+
   return (
     <FormContainer>
       <h1>Sign Up</h1>
@@ -118,6 +124,10 @@ const RegisterScreen = () => {
           Register
         </Button>
       </Form>
+
+      <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn' onClick={loginwithgoogle}>
+        <img src={Google} width={"20px"} style={{marginRight:"10px"}}/>  <span> Sign In With Google</span>
+      </Button>
 
       <Row className='py-3'>
         <Col>

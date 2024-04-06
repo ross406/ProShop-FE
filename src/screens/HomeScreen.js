@@ -11,6 +11,8 @@ import ProductCarousel from '../componenets/ProductCarousel';
 import Meta from '../componenets/Meta';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { USER_LOGIN_SUCCESS } from '../constants/userConstants';
+
 
 const HomeScreen = () => {
   const params = useParams();
@@ -26,6 +28,19 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
+
+  useEffect(() => {  
+    const queryParams = new URLSearchParams(window.location.search);
+    const user = queryParams.get('user');     
+    if (user) {
+      const parsedUserData = JSON.parse(decodeURIComponent(user));
+        dispatch({
+          type: USER_LOGIN_SUCCESS,
+          payload: parsedUserData,
+        });
+     localStorage.setItem('userInfo', JSON.stringify(parsedUserData));
+    }
+  }, []);
 
   return (
     <div>

@@ -7,6 +7,10 @@ import Loader from '../componenets/Loader';
 import { login } from '../actions/userActions';
 import FormContainer from '../componenets/FormContainer';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import './css/login.css';
+import { BASE_URL } from '../constants/constants';
+import Google from './css/google.svg'
+
 
 const LoginScreen = () => {
 
@@ -33,6 +37,10 @@ const LoginScreen = () => {
     e.preventDefault();
     dispatch(login(email, password));
   };
+
+  const loginwithgoogle = ()=> {
+    window.open(`${BASE_URL}/auth/google/callback`,"_self")
+  }
 
   return (
     <FormContainer>
@@ -64,6 +72,9 @@ const LoginScreen = () => {
           Sign In
         </Button>
       </Form>
+      <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn' onClick={loginwithgoogle}>
+        <img src={Google} width={"20px"} style={{marginRight:"10px"}}/>  <span> Sign In With Google</span>
+      </Button>
 
       <Row className='py-3'>
         <Col>
