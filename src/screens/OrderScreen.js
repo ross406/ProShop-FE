@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { PayPalButton } from 'react-paypal-button-v2';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../componenets/Message';
@@ -58,17 +57,17 @@ const OrderScreen = () => {
       history.push('/login');
     }
 
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get(`${BASE_URL}/api/config/paypal`);
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
+    // const addPayPalScript = async () => {
+    //   const { data: clientId } = await axios.get(`${BASE_URL}/api/config/paypal`);
+    //   const script = document.createElement('script');
+    //   script.type = 'text/javascript';
+    //   script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+    //   script.async = true;
+    //   script.onload = () => {
+    //     setSdkReady(true);
+    //   };
+    //   document.body.appendChild(script);
+    // };
 
     if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -77,7 +76,7 @@ const OrderScreen = () => {
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
-        addPayPalScript();
+        setSdkReady(true);
       } else {
         setSdkReady(true);
       }
@@ -209,10 +208,9 @@ const OrderScreen = () => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn'>
+                    <span> Payment Feature is Work in Progress</span>
+                </Button>
                   )}
                 </ListGroup.Item>
               )}
