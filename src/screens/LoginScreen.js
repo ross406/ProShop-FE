@@ -42,6 +42,11 @@ const LoginScreen = () => {
     window.open(`${BASE_URL}/auth/google/callback`,"_self")
   }
 
+  const loginwithguest = () => {
+    setEmail("john@example.com")
+    setPassword("12345678")
+  }
+
   return (
     <FormContainer>
       <h1>Sign In</h1>
@@ -72,6 +77,9 @@ const LoginScreen = () => {
           Sign In
         </Button>
       </Form>
+      <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn' onClick={loginwithguest}>
+          <span> Use Guest Credentials </span>
+      </Button>
       <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn' onClick={loginwithgoogle}>
         <img src={Google} width={"20px"} style={{marginRight:"10px"}}/>  <span> Sign In With Google</span>
       </Button>
