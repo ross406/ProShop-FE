@@ -20,6 +20,7 @@ import Message from '../componenets/Message';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 import Meta from '../componenets/Meta';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { formatIndianCurrency } from '../utils';
 
 const ProductScreen = () => {
   const params = useParams();
@@ -95,7 +96,7 @@ const ProductScreen = () => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item style={{fontSize:"24px", fontWeight:"bold"}}>Price: ₹{formatIndianCurrency(product.price)}</ListGroup.Item>
                 <ListGroup.Item style={{width:"550px"}}>
                   Description: {product.description}
                 </ListGroup.Item>
@@ -108,7 +109,7 @@ const ProductScreen = () => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>{product.price}</strong>
+                        <strong>₹{formatIndianCurrency(product.price)}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
