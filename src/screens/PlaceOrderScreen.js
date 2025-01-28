@@ -101,7 +101,7 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ₹{formatIndianCurrency(item.price)} = ${formatIndianCurrency(item.qty * item.price)}
+                          {item.qty} x ₹{formatIndianCurrency(item.price)} = ₹{formatIndianCurrency(item.qty * item.price)}
                         </Col>
                       </Row>
                     </ListGroup.Item>
