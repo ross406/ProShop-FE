@@ -84,6 +84,33 @@ const OrderScreen = () => {
     }
   }, [dispatch, orderId, successPay, history, userInfo, order, successDeliver]);
 
+  const checkoutHandler = async () => {
+
+    const options = {
+        key:'rzp_test_4hfTIkSWPKzXn4',
+        amount: order.amount,
+        currency: "INR",
+        name: "Proshop Payment",
+        description: "RazorPay Payment Gateway",
+        image: "",
+        order_id: order.id,
+        callback_url: `${BASE_URL}/api/orders/${order._id}/razorpay`,
+        prefill: {
+            name: userInfo.name,
+            email: userInfo.email,
+            contact: "9999999999"
+        },
+        notes: {
+            "address": "Razorpay Corporate Office"
+        },
+        theme: {
+            "color": "#343a40"
+        }
+    };
+    const razor = new window.Razorpay(options);
+    razor.open();
+}
+
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
@@ -209,8 +236,8 @@ const OrderScreen = () => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <Button style={{display:'flex',marginTop:"25px"}} className='login-with-google-btn'>
-                    <span> Payment Feature is Work in Progress</span>
+                    <Button style={{display:'flex',marginTop:"25px"}} onClick={checkoutHandler} className='login-with-google-btn'>
+                    <span> Make Payment </span>
                 </Button>
                   )}
                 </ListGroup.Item>

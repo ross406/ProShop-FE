@@ -39,11 +39,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`${BASE_URL}/api/orders`, order, config);
-
-    dispatch({
+    const { data:{createdOrder,razorpayOrder} } = await axios.post(`${BASE_URL}/api/orders`, order, config);
+    
+    dispatch({  
       type: ORDER_CREATE_SUCCESS,
-      payload: data,
+      payload: {...createdOrder,...razorpayOrder},
     });
   } catch (error) {
     dispatch({
