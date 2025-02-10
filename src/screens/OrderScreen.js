@@ -87,13 +87,13 @@ const OrderScreen = () => {
   const checkoutHandler = async () => {
 
     const options = {
-        key:'rzp_test_4hfTIkSWPKzXn4',
-        amount: order.amount,
+        key:'rzp_test_TcuqtPke1nQU8b',
+        amount: Math.round(Number(order.totalPrice)*100),
         currency: "INR",
         name: "Proshop Payment",
         description: "RazorPay Payment Gateway",
         image: "",
-        order_id: order.id,
+        order_id: order.paymentResult.razorpay_order_id,
         callback_url: `${BASE_URL}/api/orders/${order._id}/razorpay`,
         prefill: {
             name: userInfo.name,
